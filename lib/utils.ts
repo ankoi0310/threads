@@ -1,4 +1,3 @@
-import { formatInTimeZone } from 'date-fns-tz'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
@@ -27,6 +26,7 @@ export const formatDateString = (dateString: string) => {
   const time = date.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
+    hour12: false,
     timeZone: 'Asia/SaiGon',
   })
 
