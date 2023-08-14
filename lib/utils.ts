@@ -23,8 +23,9 @@ export const formatDateString = (dateString: string) => {
   const formattedDate = date.toLocaleDateString(undefined, options);
 
   const time = date.toLocaleTimeString([], {
-    hour: 'numeric',
+    hour: '2-digit',
     minute: '2-digit',
+    hour12: false,
   });
 
   return `${time} - ${formattedDate}`;
