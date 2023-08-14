@@ -17,7 +17,7 @@ export const formatDateString = (dateString: string) => {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
-    localeMatcher: 'lookup',
+    // localeMatcher: 'lookup',
     timeZone: 'Asia/SaiGon',
   }
 
@@ -34,7 +34,7 @@ export const formatDateString = (dateString: string) => {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-    localeMatcher: 'lookup',
+    // localeMatcher: 'lookup',
     timeZone: 'Asia/SaiGon',
   })
 
