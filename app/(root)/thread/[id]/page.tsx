@@ -45,7 +45,7 @@ export default async function Page({ params } : { params: { id: string } }) {
           <ThreadCard
             key={comment._id}
             id={comment._id}
-            currentUserId={comment?.id || ''}
+            currentUserId={user.id}
             parentId={comment.parentId}
             content={comment.text}
             author={comment.author}

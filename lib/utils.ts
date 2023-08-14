@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { type ClassValue, clsx } from 'clsx'
+import { twMerge } from 'tailwind-merge'
  
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -14,17 +14,17 @@ export const isBase64Image = (imageData: string) => {
 // created by chatgpt
 export const formatDateString = (dateString: string) => {
   const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
   };
 
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString(undefined, options);
 
   const time = date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
+    hour: 'numeric',
+    minute: '2-digit',
   });
 
   return `${time} - ${formattedDate}`;
@@ -33,10 +33,10 @@ export const formatDateString = (dateString: string) => {
 // created by chatgpt
 export const formatThreadCount = (count: number) => {
   if (count === 0) {
-    return "No Threads";
+    return 'No Threads';
   } else {
-    const threadCount = count.toString().padStart(2, "0");
-    const threadWord = count === 1 ? "Thread" : "Threads";
+    const threadCount = count.toString().padStart(2, '0');
+    const threadWord = count === 1 ? 'Thread' : 'Threads';
     return `${threadCount} ${threadWord}`;
   }
 }

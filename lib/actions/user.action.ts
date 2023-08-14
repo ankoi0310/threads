@@ -1,5 +1,6 @@
 'use server'
 
+import Community from '@/lib/models/community.model'
 import Thread from '@/lib/models/thread.model'
 import User from '@/lib/models/user.model'
 import { connectToDatabase } from '@/lib/mongoose'
@@ -37,7 +38,8 @@ export async function updateUser(userUpdateRequest: UserUpdateRequest) {
       revalidatePath(path)
     }
   } catch (error: any) {
-    throw new Error(`Failed to update user: ${error.message}`)
+    console.log('Failed to update user: ', error)
+    throw error
   }
 }
 
@@ -47,12 +49,13 @@ export async function fetchUser(userId: string) {
 
     return await User
       .findOne({ id: userId })
-    // .populate({
-    //   path: 'communities',
-    //   model: Community
-    // })
+      .populate({
+        path: 'communities',
+        model: Community,
+      })
   } catch (error: any) {
-    throw new Error(`Failed to fetch user: ${error.message}`)
+    console.log('Failed to fetch user: ', error)
+    throw error
   }
 }
 
@@ -66,43 +69,51 @@ export async function fetchUserPosts(userId: string) {
       .populate({
         path: 'threads',
         model: Thread,
-        populate: {
-          path: 'children',
-          model: Thread,
-          populate: {
-            path: 'author',
-            model: User,
-            select: 'name image id',
+        populate: [
+          {
+            path: 'community',
+            model: Community,
+            select: 'name image id _id',
           },
-        },
+          {
+            path: 'children',
+            model: Thread,
+            populate: {
+              path: 'author',
+              model: User,
+              select: 'name image id',
+            },
+          }
+        ],
       })
   } catch (error: any) {
-    throw new Error(`Failed to fetch user posts: ${error.message}`)
+    console.log('Failed to fetch user posts: ', error)
+    throw error
   }
 }
 
 interface UserSearch {
   userId: string
-  searchTerm?: string
+  searchString?: string
   pageNumber?: number
   pageSize?: number
   sortBy?: SortOrder
 }
 
 export async function fetchUsers(userSearch: UserSearch) {
-  const { userId, searchTerm = '', pageNumber = 1, pageSize = 20, sortBy = 'desc' } = userSearch
+  const { userId, searchString = '', pageNumber = 1, pageSize = 20, sortBy = 'desc' } = userSearch
   try {
     connectToDatabase()
 
     const skipAmount = (pageNumber - 1) * pageSize
 
-    const regex = new RegExp(searchTerm, 'i')
+    const regex = new RegExp(searchString, 'i')
 
     const query: FilterQuery<typeof User> = {
       id: { $ne: userId },
     }
 
-    if (searchTerm.trim() !== '') {
+    if (searchString.trim() !== '') {
       query.$or = [
         { username: { $regex: regex } },
         { name: { $regex: regex } },
@@ -124,7 +135,8 @@ export async function fetchUsers(userSearch: UserSearch) {
 
     return { users, isNext }
   } catch (error: any) {
-    throw new Error(`Failed to fetch users: ${error.message}`)
+    console.log('Failed to fetch users: ', error)
+    throw error
   }
 }
 
@@ -149,6 +161,7 @@ export async function getActivity(userId: string) {
       select: 'name image _id',
     })
   } catch (error: any) {
-    throw new Error(`Failed to fetch activity: ${error.message}`)
+    console.log('Failed to fetch activity: ', error)
+    throw error
   }
 }

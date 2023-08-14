@@ -7,10 +7,11 @@ interface ProfileHeaderProps {
   username: string
   image: string
   bio: string
+  type?: 'User' | 'Community'
 }
 
 export default function ProfileHeader(props: ProfileHeaderProps) {
-  const { accountId, authUserId, name, username, image, bio } = props
+  const { accountId, authUserId, name, username, image, bio, type } = props
 
   return (
     <div className={'flex flex-col justify-start w-full'}>

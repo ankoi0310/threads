@@ -4,6 +4,7 @@ import RightSideBar from './RightSideBar'
 import TopBar from './TopBar'
 import ProfileHeader from './ProfileHeader'
 import ThreadsTab from './ThreadsTab'
+import Pagination from './Pagination'
 
 export {
   BottomBar,
@@ -12,4 +13,5 @@ export {
   TopBar,
   ProfileHeader,
   ThreadsTab,
+  Pagination
 }
