@@ -1,3 +1,4 @@
+import { formatInTimeZone } from 'date-fns-tz'
 import { type ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
  
@@ -13,18 +14,9 @@ export const isBase64Image = (imageData: string) => {
 
 // created by chatgpt
 export const formatDateString = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  };
-
-  const date = new Date(dateString);
-  const formattedDate = date.toDateString();
-
-  const time = date.toTimeString();
-
-  return `${time} - ${formattedDate}`;
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  console.log(timeZone)
+  return formatInTimeZone(dateString, timeZone, 'HH:mm - dd MMM yyyy');
 }
 
 // created by chatgpt
