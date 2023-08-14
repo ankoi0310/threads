@@ -2,12 +2,15 @@ import { ThreadCard } from '@/components/cards'
 import { Pagination } from '@/components/shared'
 import { fetchPosts } from '@/lib/actions/thread.action'
 import { currentUser } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
 export default async function Home({ searchParams }: {
   searchParams: { [key: string]: string | undefined };
 }) {
   const result = await fetchPosts(1, 30)
   const user = await currentUser()
+
+  if (!user) redirect('/sign-in')
 
   return (
     <>
