@@ -129,6 +129,14 @@ export default function ThreadCard(props: ThreadCardProps) {
         </div>
       )}
 
+      {!isComment && !community && (
+        <div className={'mt-5 flex items-center'}>
+          <p className='text-subtle-medium text-gray-1'>
+            {formatDateString(createdAt)}
+          </p>
+        </div>
+      )}
+
       {!isComment && community && (
         <Link
           href={`/communities/${community.id}`}
