@@ -17,16 +17,24 @@ export const formatDateString = (dateString: string) => {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
+    localeMatcher: 'lookup',
     timeZone: 'Asia/SaiGon',
   }
 
   const date = new Date(dateString)
-  const formattedDate = date.toLocaleDateString([], options)
+  const formattedDate = date.toLocaleDateString([
+    'vi-VN',
+    'en-US',
+  ], options)
 
-  const time = date.toLocaleTimeString([], {
+  const time = date.toLocaleTimeString([
+    'vi-VN',
+    'en-US',
+  ], {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
+    localeMatcher: 'lookup',
     timeZone: 'Asia/SaiGon',
   })
 
