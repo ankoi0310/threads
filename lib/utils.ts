@@ -20,7 +20,7 @@ export const formatDateString = (dateString: string) => {
   };
 
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString(undefined, options);
+  const formattedDate = date.toLocaleDateString('vi-VN', options);
 
   const time = date.toLocaleTimeString([], {
     hour: '2-digit',
