@@ -20,10 +20,9 @@ export const formatDateString = (dateString: string) => {
   };
 
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString(undefined, options);
+  const formattedDate = date.toLocaleDateString([], options);
 
-  const time = date.toLocaleTimeString(undefined, {
-    localeMatcher: 'best fit',
+  const time = date.toLocaleTimeString([], {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
