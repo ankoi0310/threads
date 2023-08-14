@@ -22,7 +22,8 @@ export const formatDateString = (dateString: string) => {
   const date = new Date(dateString);
   const formattedDate = date.toLocaleDateString(undefined, options);
 
-  const time = date.toLocaleTimeString(['en-US', 'vi-VN'], {
+  const time = date.toLocaleTimeString(undefined, {
+    localeMatcher: 'best fit',
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
