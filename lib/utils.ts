@@ -20,13 +20,9 @@ export const formatDateString = (dateString: string) => {
   };
 
   const date = new Date(dateString);
-  const formattedDate = date.toLocaleDateString([], options);
+  const formattedDate = date.toDateString();
 
-  const time = date.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
+  const time = date.toTimeString();
 
   return `${time} - ${formattedDate}`;
 }
