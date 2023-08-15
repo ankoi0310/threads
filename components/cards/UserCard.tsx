@@ -9,7 +9,7 @@ interface UserCardProps {
   name: string
   username: string
   image: string
-  accountType: 'User' | 'Organization'
+  accountType: 'User' | 'Community'
 }
 
 export default function UserCard(props: UserCardProps) {
