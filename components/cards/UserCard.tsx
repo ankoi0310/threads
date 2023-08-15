@@ -35,7 +35,7 @@ export default function UserCard(props: UserCardProps) {
 
       <Button
         className={'user-card_btn'}
-        onClick={() => router.push(`/profile/${id}`)}
+        onClick={() => router.push(`/${accountType === 'User' ? 'profile' : 'communities'}/${id}`)}
       >View</Button>
     </article>
   )
